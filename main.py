@@ -65,7 +65,6 @@ def get_time():
 
 # 获取登录code
 def get_access_token(location):
-    print("获取location：", location)
     code_pattern = re.compile("(?<=access=).*?(?=&)")
     result = code_pattern.findall(location)
     if result is None or len(result) == 0:
@@ -132,9 +131,6 @@ class MiMotionRunner:
             "redirect_uri": "https://s3-us-west-2.amazonaws.com/hm-registration/successsignin.html",
             "token": "access"
         }
-        print("请求地址：", url1)
-        print("请求参数：", data1)
-        print("headers：", login_headers)
         r1 = requests.post(url1, data=data1, headers=login_headers, allow_redirects=False)
         if r1.status_code != 303:
             self.log_str += "登录异常，status: %d\n" % r1.status_code
